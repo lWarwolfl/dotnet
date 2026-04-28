@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-var dbPath = Path.Combine(builder.Environment.ContentRootPath, "activities.db");
+var dbPath = Path.Combine(builder.Environment.ContentRootPath, "reactivities.db");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlite($"Data Source={dbPath}");
