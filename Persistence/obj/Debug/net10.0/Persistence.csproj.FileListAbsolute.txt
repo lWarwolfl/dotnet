@@ -13,3 +13,4 @@ C:\Users\msina\Desktop\Projects\Project - DotNet\dotnet\Persistence\obj\Debug\ne
 C:\Users\msina\Desktop\Projects\Project - DotNet\dotnet\Persistence\obj\Debug\net10.0\refint\Persistence.dll
 C:\Users\msina\Desktop\Projects\Project - DotNet\dotnet\Persistence\obj\Debug\net10.0\Persistence.pdb
 C:\Users\msina\Desktop\Projects\Project - DotNet\dotnet\Persistence\obj\Debug\net10.0\ref\Persistence.dll
+C:\Users\msina\Desktop\Projects\Project - DotNet\dotnet\Persistence\obj\Debug\net10.0\Persistence.sourcelink.json
