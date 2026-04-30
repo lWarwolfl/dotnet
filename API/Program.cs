@@ -1,3 +1,5 @@
+using Application.Activities.Queries;
+using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Scalar.AspNetCore;
@@ -10,6 +12,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddCors();
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetActivities.Handler>());
+builder.Services.AddAutoMapper(x => { }, typeof(MappingProfiles).Assembly);
 
 var dbPath = Path.Combine(builder.Environment.ContentRootPath, "reactivities.db");
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -29,7 +33,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3000"));
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();
