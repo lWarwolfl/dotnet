@@ -1,4 +1,5 @@
 using Application.Activities.Commands;
+using Application.Activities.DTOs;
 using Application.Activities.Queries;
 using Domain;
 using MediatR;
@@ -17,28 +18,25 @@ public class ActivitiesController : BaseApiController
     [HttpGet("{id}")]
     public async Task<ActionResult<Activity>> ActivityById(string id)
     {
-        return await Mediator.Send(new GetActivityById.Query { Id = id });
+        return HandleResult(await Mediator.Send(new GetActivityById.Query { Id = id }));
     }
 
     [HttpPost]
-    public async Task<ActionResult<string>> ActivityPost(Activity activity)
+    public async Task<ActionResult<CreateActivity.Response>> ActivityPost(CreateActivityDTO createActivityDTO)
     {
-        return await Mediator.Send(new CreateActivity.Command { Activity = activity });
+        return HandleResult(await Mediator.Send(new CreateActivity.Command { CreateActivityDTO = createActivityDTO }));
     }
 
     [HttpPut]
     public async Task<ActionResult> ActivityPut(Activity activity)
     {
-        await Mediator.Send(new EditActivity.Command { Activity = activity });
-
-        return NoContent();
+        return HandleResult(await Mediator.Send(new EditActivity.Command { Activity = activity }));
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> ActivityDelete(string id)
     {
-        await Mediator.Send(new RemoveActivity.Command { Id = id });
+        return HandleResult(await Mediator.Send(new RemoveActivity.Command { Id = id }));
 
-        return Ok();
     }
 }
