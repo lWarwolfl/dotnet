@@ -10,6 +10,6 @@ public class BaseActivityDto
     // location details
     public string City { get; set; } = string.Empty;
     public string Venue { get; set; } = string.Empty;
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
+    public double? Latitude { get; set; }
+    public double? Longitude { get; set; }
 }
