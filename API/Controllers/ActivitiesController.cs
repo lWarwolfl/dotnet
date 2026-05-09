@@ -22,15 +22,15 @@ public class ActivitiesController : BaseApiController
     }
 
     [HttpPost]
-    public async Task<ActionResult<CreateActivity.Response>> ActivityPost(CreateActivityDTO createActivityDTO)
+    public async Task<ActionResult<CreateActivity.Response>> ActivityPost(CreateActivityDto activityDto)
     {
-        return HandleResult(await Mediator.Send(new CreateActivity.Command { CreateActivityDTO = createActivityDTO }));
+        return HandleResult(await Mediator.Send(new CreateActivity.Command { ActivityDto = activityDto }));
     }
 
     [HttpPut]
-    public async Task<ActionResult> ActivityPut(Activity activity)
+    public async Task<ActionResult> ActivityPut(EditActivityDto activityDto)
     {
-        return HandleResult(await Mediator.Send(new EditActivity.Command { Activity = activity }));
+        return HandleResult(await Mediator.Send(new EditActivity.Command { ActivityDto = activityDto }));
     }
 
     [HttpDelete("{id}")]

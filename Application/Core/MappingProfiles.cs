@@ -11,6 +11,7 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<Activity, Activity>();
-        CreateMap<CreateActivityDTO, Activity>();
+        CreateMap<CreateActivityDto, Activity>();
+        CreateMap<EditActivityDto, Activity>();
     }
 }
