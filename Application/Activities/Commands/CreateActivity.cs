@@ -18,14 +18,14 @@ public class CreateActivity
 
     public class Command : IRequest<Result<Response>>
     {
-        public required CreateActivityDTO CreateActivityDTO { get; set; }
+        public required CreateActivityDto ActivityDto { get; set; }
     }
 
     public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command, Result<Response>>
     {
         public async Task<Result<Response>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var activity = mapper.Map<Activity>(request.CreateActivityDTO);
+            var activity = mapper.Map<Activity>(request.ActivityDto);
 
             context.Activities.Add(activity);
 
