@@ -41,6 +41,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlite($"Data Source={dbPath}");
 });
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-XSRF-TOKEN";
+});
 
 var app = builder.Build();
 
@@ -56,6 +60,7 @@ app.UseHttpsRedirection();
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3000"));
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseAntiforgery();
 
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<User>();

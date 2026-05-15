@@ -1,12 +1,13 @@
 using System;
 using Domain;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class AccountController(SignInManager<User> signInManager) : BaseApiController
+public class AccountController(SignInManager<User> signInManager, IAntiforgery antiforgery) : BaseApiController
 {
     public class UserInfo
     {
@@ -37,6 +38,22 @@ public class AccountController(SignInManager<User> signInManager) : BaseApiContr
     public async Task<ActionResult> Logout()
     {
         await signInManager.SignOutAsync();
+
+        return NoContent();
+    }
+
+    [HttpGet("csrf-token")]
+    public async Task<ActionResult> GetAntiforgeryToken()
+    {
+        var tokens = antiforgery.GetAndStoreTokens(HttpContext);
+
+        HttpContext.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken!,
+            new CookieOptions
+            {
+                HttpOnly = false,
+                Secure = true,
+                SameSite = SameSiteMode.None
+            });
 
         return NoContent();
     }
