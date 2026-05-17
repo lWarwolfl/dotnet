@@ -17,9 +17,12 @@ public class AccountController(SignInManager<User> signInManager, IAntiforgery a
         public string? ImageUrl { get; set; }
     }
 
+    [AllowAnonymous]
     [HttpGet("user-info")]
     public async Task<ActionResult<UserInfo>> GetUserInfo()
     {
+        if (User.Identity?.IsAuthenticated == false) return NoContent();
+
         var user = await signInManager.UserManager.GetUserAsync(User);
 
         if (user == null) return Unauthorized();
@@ -32,7 +35,6 @@ public class AccountController(SignInManager<User> signInManager, IAntiforgery a
             ImageUrl = user.ImageUrl,
         });
     }
-
 
     [HttpPost("logout")]
     public async Task<ActionResult> Logout()
