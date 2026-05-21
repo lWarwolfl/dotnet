@@ -1,4 +1,5 @@
 using System;
+using Application.Profiles.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
@@ -9,17 +10,9 @@ namespace API.Controllers;
 
 public class AccountController(SignInManager<User> signInManager, IAntiforgery antiforgery) : BaseApiController
 {
-    public class UserInfo
-    {
-        public required string Id { get; set; }
-        public required string Email { get; set; }
-        public string? DisplayName { get; set; }
-        public string? ImageUrl { get; set; }
-    }
-
     [AllowAnonymous]
     [HttpGet("user-info")]
-    public async Task<ActionResult<UserInfo>> GetUserInfo()
+    public async Task<ActionResult<ProfileDto>> GetUserInfo()
     {
         if (User.Identity?.IsAuthenticated == false) return NoContent();
 
@@ -27,7 +20,7 @@ public class AccountController(SignInManager<User> signInManager, IAntiforgery a
 
         if (user == null) return Unauthorized();
 
-        return Ok(new UserInfo
+        return Ok(new ProfileDto
         {
             Id = user.Id,
             Email = user.Email!,
