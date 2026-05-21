@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain;
@@ -8,4 +9,5 @@ public class User : IdentityUser
     public string? DisplayName { get; set; }
     public string? Bio { get; set; }
     public string? ImageUrl { get; set; }
+    public Collection<ActivityAttendee> Activities { get; set; } = [];
 }

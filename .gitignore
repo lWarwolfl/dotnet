@@ -485,3 +485,4 @@ API/appsettings.json
 .vscode/settings.json
 API/reactivities.db-wal
 API/reactivities.db-shm
+dotnet-tools.json
