@@ -49,6 +49,9 @@ builder.Services.AddAntiforgery(options =>
 {
     options.HeaderName = "X-XSRF-TOKEN";
 });
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("IsActivityHost", policy => { policy.Requirements.Add(new IsHostRequirement()); });
+builder.Services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
 var app = builder.Build();
 
