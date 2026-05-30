@@ -5,7 +5,8 @@ using Application.Core;
 using Application.Interfaces;
 using Domain;
 using FluentValidation;
-using Infrastructure;
+using Infrastructure.Images;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -32,6 +33,7 @@ builder.Services.AddMediatR(x =>
 });
 
 builder.Services.AddScoped<IUserAccessor, UserAccessor>();
+builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddAutoMapper(x => { }, typeof(MappingProfiles).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
 builder.Services.AddTransient<ExceptionMiddleware>();
@@ -52,6 +54,7 @@ builder.Services.AddAntiforgery(options =>
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("IsActivityHost", policy => { policy.Requirements.Add(new IsHostRequirement()); });
 builder.Services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
+builder.Services.Configure<ImagekitSettings>(builder.Configuration.GetSection("ImagekitSettings"));
 
 var app = builder.Build();
 

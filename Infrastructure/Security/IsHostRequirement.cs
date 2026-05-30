@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Infrastructure;
+namespace Infrastructure.Security;
 
 public class IsHostRequirement : IAuthorizationRequirement
 {
