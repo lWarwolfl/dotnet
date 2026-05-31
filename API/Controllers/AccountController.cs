@@ -1,5 +1,6 @@
 using System;
 using Application.Profiles.DTOs;
+using AutoMapper;
 using Domain;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class AccountController(SignInManager<User> signInManager, IAntiforgery antiforgery) : BaseApiController
+public class AccountController(SignInManager<User> signInManager, IAntiforgery antiforgery, IMapper mapper) : BaseApiController
 {
     [AllowAnonymous]
     [HttpGet("user-info")]
@@ -20,13 +21,7 @@ public class AccountController(SignInManager<User> signInManager, IAntiforgery a
 
         if (user == null) return Unauthorized();
 
-        return Ok(new ProfileDto
-        {
-            Id = user.Id,
-            Email = user.Email!,
-            DisplayName = user.DisplayName,
-            ImageUrl = user.ImageUrl,
-        });
+        return Ok(mapper.Map<ProfileDto>(user));
     }
 
     [HttpPost("logout")]

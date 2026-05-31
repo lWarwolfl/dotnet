@@ -17,7 +17,6 @@ public class ImageService : IImageService
     {
         _imagekit = new ImageKitClient()
         {
-            BaseUrl = config.Value.UrlEndpoint,
             PrivateKey = config.Value.PrivateKey,
         };
     }
