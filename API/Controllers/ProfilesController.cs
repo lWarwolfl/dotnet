@@ -9,7 +9,7 @@ namespace API.Controllers;
 public class ProfilesController : BaseApiController
 {
     [HttpPost("update-image")]
-    public async Task<ActionResult<List<Image>>> ImagePost([FromForm] UpdateImage.Command command)
+    public async Task<ActionResult<Image>> ImagePost([FromForm] UpdateImage.Command command)
     {
         return HandleResult(await Mediator.Send(command));
     }
