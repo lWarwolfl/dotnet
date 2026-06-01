@@ -19,4 +19,11 @@ public class ProfilesController : BaseApiController
     {
         return HandleResult(await Mediator.Send(new GetProfileById.Query { Id = id }));
     }
+
+    [HttpPut]
+    public async Task<ActionResult> ProfilePut(UpdateProfile.Command command)
+    {
+        return HandleResult(await Mediator.Send(command));
+    }
+
 }
