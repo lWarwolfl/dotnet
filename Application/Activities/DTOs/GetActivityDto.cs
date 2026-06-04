@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using Application.Profiles.DTOs;
 
 namespace Application.Activities.DTOs;

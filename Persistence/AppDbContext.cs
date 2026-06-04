@@ -1,4 +1,3 @@
-using System;
 using Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +9,7 @@ public class AppDbContext(DbContextOptions options) : IdentityDbContext<User>(op
     public required DbSet<Activity> Activities { get; set; }
     public required DbSet<ActivityAttendee> ActivityAttendees { get; set; }
     public required DbSet<Image> Images { get; set; }
+    public required DbSet<Comment> Comments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

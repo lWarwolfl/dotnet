@@ -10,8 +10,8 @@ public class DbInitializer
     {
         var users = new List<User>
             {
-              new() { DisplayName = "Sina" , UserName = "sinakheiri.dev@gmail.com" , Email= "sinakheiri.dev@gmail.com" },
-              new() { DisplayName = "Nafise" , UserName = "nafiselotfi907@gmail.com" , Email= "nafiselotfi907@gmail.com" }
+              new() { UserName = "sinakheiri.dev@gmail.com" , Email= "sinakheiri.dev@gmail.com" },
+              new() { UserName = "nafiselotfi907@gmail.com" , Email= "nafiselotfi907@gmail.com" }
             };
 
         if (!userManager.Users.Any())

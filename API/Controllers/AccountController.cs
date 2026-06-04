@@ -13,7 +13,7 @@ public class AccountController(SignInManager<User> signInManager, IAntiforgery a
 {
     [AllowAnonymous]
     [HttpGet("user-info")]
-    public async Task<ActionResult<ProfileDto>> GetUserInfo()
+    public async Task<ActionResult<UserInfoDto>> GetUserInfo()
     {
         if (User.Identity?.IsAuthenticated == false) return NoContent();
 
@@ -21,7 +21,7 @@ public class AccountController(SignInManager<User> signInManager, IAntiforgery a
 
         if (user == null) return Unauthorized();
 
-        return Ok(mapper.Map<ProfileDto>(user));
+        return Ok(mapper.Map<UserInfoDto>(user));
     }
 
     [HttpPost("logout")]
