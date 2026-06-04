@@ -47,4 +47,16 @@ public class ActivitiesController : BaseApiController
     {
         return HandleResult(await Mediator.Send(new UpdateAttendance.Command { Id = id }));
     }
+
+    [HttpPost("/comments")]
+    public async Task<ActionResult<GetCommentDto>> CreateCommentPost(CreateComment.Command command)
+    {
+        return HandleResult(await Mediator.Send(command));
+    }
+
+    [HttpGet("{id}/comments")]
+    public async Task<ActionResult<GetCommentDto>> ActivityCommentsByIdGet(string id)
+    {
+        return HandleResult(await Mediator.Send(new GetActivityCommentsById.Query { ActivityId = id }));
+    }
 }
