@@ -1,4 +1,4 @@
-using API.DTOs;
+using Application.Profiles.DTOs;
 using AutoMapper;
 using Domain;
 using Microsoft.AspNetCore.Antiforgery;

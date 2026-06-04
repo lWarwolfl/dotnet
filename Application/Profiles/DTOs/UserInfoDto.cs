@@ -1,4 +1,4 @@
-namespace API.DTOs;
+namespace Application.Profiles.DTOs;
 
 public class UserInfoDto
 {
