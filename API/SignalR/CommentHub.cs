@@ -7,11 +7,11 @@ namespace API.SignalR;
 
 class CommentHub(IMediator mediator) : Hub
 {
-    public async Task SendComment(AddComment.Command command)
+    public async Task SendComment(CreateComment.Command command)
     {
         var comment = await mediator.Send(command);
 
-        await Clients.Group(command.ActivityId).SendAsync("ReceiveComment", comment.Value);
+        await Clients.Group(command.createCommentDto.ActivityId).SendAsync("ReceiveComment", comment.Value);
     }
 
     public override async Task OnConnectedAsync()
