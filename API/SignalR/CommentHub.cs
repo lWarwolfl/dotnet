@@ -11,7 +11,7 @@ class CommentHub(IMediator mediator) : Hub
     {
         var comment = await mediator.Send(command);
 
-        await Clients.Group(command.createCommentDto.ActivityId).SendAsync("ReceiveComment", comment.Value);
+        await Clients.Group(command.CreateCommentDto.ActivityId).SendAsync("ReceiveComment", comment.Value);
     }
 
     public override async Task OnConnectedAsync()

@@ -14,20 +14,20 @@ public class CreateComment
 
     public class Command : IRequest<Result<GetCommentDto>>
     {
-        public required CreateCommentDto createCommentDto { get; set; }
+        public required CreateCommentDto CreateCommentDto { get; set; }
     }
 
     public class Handler(AppDbContext context, IMapper mapper, IUserAccessor userAccessor) : IRequestHandler<Command, Result<GetCommentDto>>
     {
         public async Task<Result<GetCommentDto>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var activity = await context.Activities.Include(x => x.Comments).ThenInclude(x => x.User).FirstOrDefaultAsync(x => x.Id == request.createCommentDto.ActivityId, cancellationToken);
+            var activity = await context.Activities.Include(x => x.Comments).ThenInclude(x => x.User).FirstOrDefaultAsync(x => x.Id == request.CreateCommentDto.ActivityId, cancellationToken);
 
             if (activity == null) return Result<GetCommentDto>.Failure("Activity not found!", 404);
 
             var user = await userAccessor.GetUserAsync();
 
-            var comment = new Comment { ActivityId = activity.Id, UserId = user.Id, Body = request.createCommentDto.Body };
+            var comment = new Comment { ActivityId = activity.Id, UserId = user.Id, Body = request.CreateCommentDto.Body };
 
             activity.Comments.Add(comment);
 
