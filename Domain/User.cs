@@ -15,6 +15,8 @@ public class User : IdentityUser
     public string? ImageUrl { get; set; }
     public ICollection<ActivityAttendee> Activities { get; set; } = [];
     public ICollection<Image> Images { get; set; } = [];
+    public ICollection<UserFollowing> Followings { get; set; } = [];
+    public ICollection<UserFollowing> Followers { get; set; } = [];
 
     private static string GenerateRandomTag()
     {
